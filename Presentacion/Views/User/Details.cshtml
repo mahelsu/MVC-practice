@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Capa_Entidad.Usuario>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Tabla de usuarios</h1>
+@*<button class="btn btn-7 btn-7g btn-icon-only icon-plus">Add</button>*@
+<div class="container-fluid">
+
+    <a href="/User/Create" class="btn btn-7 btn-7g btn-icon-only icon-plus"></a>
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                <label>ID</label>
+            </th>
+            <th>
+                <label>Nombre </label>
+            </th>
+            <th>
+                <label>Correo electronico </label>
+            </th>
+            <th>
+                <label> ID departamento</label>
+            </th>
+            <th>
+                <label> Cargo</label>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.id)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idDpt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cargo)
+                </td>
+
+            </tr>
+
+        }
+    </table>
+    <div class="row">
+
+        <div class="col-md-3">
+            <a href="/User/Delete" class="btn btn-2 btn-2e">Delete</a>
+        </div>
+        <div class="col-md-3">
+            <a href="/User/Edit" class="btn btn-8 btn-8d">Edit</a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Home/ControlRegistros" class="btn btn-2 btn-2c">Volver</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DocumentControlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" />
+          <Property Name="siglas" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="25" />
+          <Property Name="idEmpleado" Type="int" />
+          <Property Name="dptOrigen" Type="varchar" MaxLength="25" />
+          <Property Name="dptDestino" Type="varchar" MaxLength="25" />
+          <Property Name="secuencia" Type="varchar" MaxLength="25" />
+          <Property Name="fecha" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="15" />
+          <Property Name="correo" Type="varchar" MaxLength="30" />
+          <Property Name="idDpt" Type="int" />
+          <Property Name="cargo" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <Association Name="FK__Documento__idEmp__5CD6CB2B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__idDpt__4BAC3F29">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idDpt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="rptDoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="rptDocD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dptD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="rptDocFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fdesde" Type="varchar" Mode="In" />
+          <Parameter Name="Fhasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="rptDocO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dptO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="rptEmpDoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="rptEmpDpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DocumentControlModelStoreContainer">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documento" EntityType="Self.Documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Documento__idEmp__5CD6CB2B" Association="Self.FK__Documento__idEmp__5CD6CB2B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__idDpt__4BAC3F29" Association="Self.FK__Usuario__idDpt__4BAC3F29">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DocumentControlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="idDpt" Type="Int32" />
+          <Property Name="cargo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamento" Relationship="DocumentControlModel.FK__Usuario__idDpt__4BAC3F29" FromRole="Usuario" ToRole="Departamento" />
+          <NavigationProperty Name="Documento" Relationship="DocumentControlModel.FK__Documento__idEmp__5CD6CB2B" FromRole="Usuario" ToRole="Documento" />
+        </EntityType>
+        <EntityContainer Name="DocumentControlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Departamento" EntityType="DocumentControlModel.Departamento" />
+          <AssociationSet Name="FK__Usuario__idDpt__4BAC3F29" Association="DocumentControlModel.FK__Usuario__idDpt__4BAC3F29">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="Documento" EntityType="DocumentControlModel.Documento" />
+          <AssociationSet Name="FK__Documento__idEmp__5CD6CB2B" Association="DocumentControlModel.FK__Documento__idEmp__5CD6CB2B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Documento" EntitySet="Documento" />
+          </AssociationSet>
+          <FunctionImport Name="rptDoc" ReturnType="Collection(DocumentControlModel.rptDoc_Result)" />
+          <FunctionImport Name="rptDocD" ReturnType="Collection(DocumentControlModel.rptDocD_Result)">
+            <Parameter Name="dptD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rptDocFecha" ReturnType="Collection(DocumentControlModel.rptDocFecha_Result)">
+            <Parameter Name="Fdesde" Mode="In" Type="String" />
+            <Parameter Name="Fhasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rptDocO" ReturnType="Collection(DocumentControlModel.rptDocO_Result)">
+            <Parameter Name="dptO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rptEmpDoc" ReturnType="Collection(DocumentControlModel.rptEmpDoc_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="rptEmpDpt" ReturnType="Collection(DocumentControlModel.rptEmpDpt_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DocumentControlModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DocumentControlModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="siglas" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="DocumentControlModel.FK__Usuario__idDpt__4BAC3F29" FromRole="Departamento" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Usuario__idDpt__4BAC3F29">
+          <End Type="DocumentControlModel.Departamento" Role="Departamento" Multiplicity="0..1" />
+          <End Type="DocumentControlModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idDpt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Documento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="idEmpleado" Type="Int32" />
+          <Property Name="dptOrigen" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="dptDestino" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="secuencia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="DocumentControlModel.FK__Documento__idEmp__5CD6CB2B" FromRole="Documento" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Documento__idEmp__5CD6CB2B">
+          <End Type="DocumentControlModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="DocumentControlModel.Documento" Role="Documento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Documento">
+              <PropertyRef Name="idEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="rptDoc_Result">
+          <Property Type="String" Name="Tipo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Empleado" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Departamento_de_origen" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_Destino" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Secuencia_o_código" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Fecha_de_expedio" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="rptDocD_Result">
+          <Property Type="String" Name="tipo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_origen" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_Destino" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="secuencia" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Fecha_de_expedio" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="rptDocFecha_Result">
+          <Property Type="String" Name="Fecha_de_expedio" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Tipo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_origen" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_Destino" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Secuencia_o_código" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="rptDocO_Result">
+          <Property Type="String" Name="tipo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_origen" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_Destino" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="secuencia" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Fecha_de_expedio" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="rptEmpDoc_Result">
+          <Property Type="String" Name="Tipo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Empleado" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Departamento_de_origen" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Departamento_de_Destino" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Secuencia_o_código" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Fecha_de_expedio" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="rptEmpDpt_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Departamento" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Cargo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DocumentControlModelStoreContainer" CdmEntityContainer="DocumentControlEntities">
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="DocumentControlModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="idDpt" ColumnName="idDpt" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="DocumentControlModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="siglas" ColumnName="siglas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documento">
+            <EntityTypeMapping TypeName="DocumentControlModel.Documento">
+              <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="dptDestino" ColumnName="dptDestino" />
+                <ScalarProperty Name="dptOrigen" ColumnName="dptOrigen" />
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="rptDoc" FunctionName="DocumentControlModel.Store.rptDoc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptDoc_Result">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Departamento_de_origen" ColumnName="Departamento de origen" />
+                <ScalarProperty Name="Departamento_de_Destino" ColumnName="Departamento de Destino" />
+                <ScalarProperty Name="Secuencia_o_código" ColumnName="Secuencia o código" />
+                <ScalarProperty Name="Fecha_de_expedio" ColumnName="Fecha de expedio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rptDocD" FunctionName="DocumentControlModel.Store.rptDocD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptDocD_Result">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="Departamento_de_origen" ColumnName="Departamento de origen" />
+                <ScalarProperty Name="Departamento_de_Destino" ColumnName="Departamento de Destino" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="Fecha_de_expedio" ColumnName="Fecha de expedio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rptDocFecha" FunctionName="DocumentControlModel.Store.rptDocFecha">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptDocFecha_Result">
+                <ScalarProperty Name="Fecha_de_expedio" ColumnName="Fecha de expedio" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Departamento_de_origen" ColumnName="Departamento de origen" />
+                <ScalarProperty Name="Departamento_de_Destino" ColumnName="Departamento de Destino" />
+                <ScalarProperty Name="Secuencia_o_código" ColumnName="Secuencia o código" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rptDocO" FunctionName="DocumentControlModel.Store.rptDocO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptDocO_Result">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="Departamento_de_origen" ColumnName="Departamento de origen" />
+                <ScalarProperty Name="Departamento_de_Destino" ColumnName="Departamento de Destino" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="Fecha_de_expedio" ColumnName="Fecha de expedio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rptEmpDoc" FunctionName="DocumentControlModel.Store.rptEmpDoc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptEmpDoc_Result">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Empleado" ColumnName="Empleado" />
+                <ScalarProperty Name="Departamento_de_origen" ColumnName="Departamento de origen" />
+                <ScalarProperty Name="Departamento_de_Destino" ColumnName="Departamento de Destino" />
+                <ScalarProperty Name="Secuencia_o_código" ColumnName="Secuencia o código" />
+                <ScalarProperty Name="Fecha_de_expedio" ColumnName="Fecha de expedio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rptEmpDpt" FunctionName="DocumentControlModel.Store.rptEmpDpt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.rptEmpDpt_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DocumentControlModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DocumentControlModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DocumentControlModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DocumentControlModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DocumentControlModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DocumentControlModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DocumentControlModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DocumentControlModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

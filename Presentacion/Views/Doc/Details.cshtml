@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Capa_Entidad.Documento>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Detalles de documentos </h1>
+
+
+<div class="container-fluid">
+    <a href="/Doc/Create" class="btn btn-7 btn-7g btn-icon-only icon-plus"></a>
+
+    <table class="table">
+        <tr>
+            <th>
+                <label> Tipo</label>
+            </th>
+            <th>
+                <label>ID empleado</label>
+            </th>
+            <th>
+                <label>Departamento de origen</label>
+            </th>
+            <th>
+                <label>Departamento de destino</label>
+            </th>
+            <th>
+                <label>Secuecia</label>
+            </th>
+            <th>
+                <label>Fecha</label>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dptOrigen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dptDestino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.secuencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</div>
+<br />
+<a href="/Home/ControlRegistros" class="btn btn-2 btn-2c">Volver</a>

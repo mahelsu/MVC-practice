@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Capa_Entidad.Departamento>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Detalles de departamentos</h1>
+
+<div class="container-fluid">
+    <a href="/Dpto/Create" class="btn btn-7 btn-7g btn-icon-only icon-plus"></a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label> ID</label>
+                </th>
+                <th>
+                    <label>Nombre</label>
+                </th>
+                <th>
+                    <label>Siglas</label>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.siglas)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+       
+
+    </table>
+    <div class="row">
+
+        <div class="col-md-3">
+            <a href="/Dpto/Delete" class="btn btn-2 btn-2e">Delete</a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Dpto/Edit" class="btn btn-8 btn-8d">Edit</a>
+        </div>
+        <div class="col-md-3">
+            <a href="/Home/ControlRegistros" class="btn btn-2 btn-2c">Volver</a>
+        </div>
+
+
+        
+
+    </div>
+
+</div>

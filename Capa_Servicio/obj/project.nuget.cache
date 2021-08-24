@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "pdARtIo6ksCT9ImhYl3UXVg7e4qR81sHNyo8leDZqPelQBb8hmPg9NBSZlppg1bIm03Oxm/XQajumKkXyS2c0Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\FinalProyect\\Capa_Servicio\\Capa_Servicio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

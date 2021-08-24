@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ReporteDocOrigenF";
+}
+
+
+<h2>Introduzca aquí el departamento de origen para generar reporte</h2>
+<br />
+<br />
+<form action="/Report/ReporteDocOrigenR" method="post">
+    <div class="row">      
+        <div class="col-sm-5">
+            <input type="text" name="dptOrigen" placeholder="Departamento de origen" class="form-control" />
+            <br />
+            <button class="btn btn-info">Buscar documentos</button>
+            <br />         
+            <a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>
+        </div>   
+    </div>
+  
+</form>
+

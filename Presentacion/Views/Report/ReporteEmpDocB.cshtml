@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ReporteEmpDocB";
+}
+
+<h2>Introduzca aquí el nombre del empleado para generar reporte</h2>
+
+<form action="/Report/ReporteEmpDocR" method="post">
+    <div class="row">
+        <div class="col-sm-5">
+            <label>Nombre</label>
+            <input type="text" name="nombre" placeholder="Nombre del empleado" class="form-control" />
+            <br />
+            <button class="btn btn-info">Buscar Documentos</button>
+            <br />
+            <a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>
+        </div>
+        
+    </div>
+    <hr />
+</form>
+

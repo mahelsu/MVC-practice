@@ -1,0 +1,49 @@
+﻿@model Capa_Entidad.Departamento
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Departamento</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Introduzca el id del departamento que quiere editar</h4>
+    
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(model => model.id)*@
+
+    <div class="form-group">
+      
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.id, new { htmlAttributes = new { @class = "form-control", @placeholder = "ID" } })
+            @Html.ValidationMessageFor(model => model.id, "", new { @class = "text-danger" })
+            <hr />
+
+            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nuevo nombre" } })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+            <br />
+            @Html.EditorFor(model => model.siglas, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nuevas siglas" } })
+            @Html.ValidationMessageFor(model => model.siglas, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" value="Save" class="btn btn-8 btn-8d" />                   
+                </div>
+                <div class="col-md-6">
+                    <a href="/Dpto/Details" class="btn btn-6 btn-6h"> Tabla</a>
+                </div>
+            </div>
+        </div>
+    </div>
+             
+  
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

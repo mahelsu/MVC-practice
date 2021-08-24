@@ -1,0 +1,193 @@
+﻿@{
+    Layout = null;
+}
+
+@using Presentacion.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Iniciar sesión";
+}
+<!-- Bootstrap -->
+<link href="~/Vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<!-- Font Awesome -->
+<link href="~/Vendors/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+<!-- NProgress -->
+<link href="~/Vendors/nprogress/nprogress.css" rel="stylesheet" />
+<!-- Custom Theme Style -->
+<link href="~/Content/Alela/css/custom.min.css" rel="stylesheet" />
+<link href="~/Content/Alela/css/custom.css" rel="stylesheet" />
+
+
+<link href="~/Content/CreativeButtons/css/default.css" rel="stylesheet" />
+<link href="~/Content/CreativeButtons/css/component.css" rel="stylesheet" />
+@*<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">*@
+
+
+    <div class="main">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <p class="sign" align="center"> Iniciar sesión.</p>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <form class="form1">
+
+            @Html.TextBoxFor(m => m.Email, new { @class = "un", @placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+
+
+            @Html.PasswordFor(m => m.Password, new { @class = "pass", @placeholder = "Contraseña" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+
+            <input type="submit" align="center" value="Iniciar sesión" class="submit" />
+            <p align="center" class="forgot"> <a href="/Account/Register">Registrarse </a></p>
+       
+            <div class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </div>
+        </form>
+
+                         
+                
+                
+               
+                
+
+                    
+                
+                     
+            }
+        </section>
+    </div>
+    @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
+
+<style>
+    body {
+        background-color:#A8D0E6;
+    }
+
+    .main {
+        background-color: #FFFFFF;
+        width: 400px;
+        height: 400px;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+
+    .sign {
+        padding-top: 40px;
+        color: #F76C6C;
+        font-weight: bold;
+        font-size: 23px;
+    }
+
+    .un {
+        width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid rgba(0, 0, 0, 0.02);
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+      
+    }
+
+    form.form1 {
+        padding-top: 40px;
+    }
+
+    .pass {
+                width: 76%;
+        color: rgb(38, 50, 56);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        background: rgba(136, 126, 126, 0.04);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        box-sizing: border-box;
+        border: 2px solid rgba(0, 0, 0, 0.02);
+        margin-bottom: 50px;
+        margin-left: 46px;
+        text-align: center;
+        margin-bottom: 27px;
+       
+    }
+
+
+    .un:focus, .pass:focus {
+        border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+    }
+
+    .submit {
+        cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: #F76C6C;
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        
+        margin-left: 30%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .forgot {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #F76C6C;
+        padding-top: 15px;
+    }
+
+    a {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #F76C6C;
+        text-decoration: none
+    }
+
+    @@media (max-width: 600px) {
+        .main {
+            border-radius: 0px;
+        }
+    }
+
+    .checkbox{
+        margin-left:10%
+    }
+</style>
+
+<script src="~/Vendors/jquery/jquery.min.js"></script>
+<script src="~/Content/Alela/js/custom.js"></script>
+<script src="~/Vendors/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="~/Vendors/nprogress/nprogress.js"></script>
+<script src="~/Content/myCss/Style.js"></script>
+<script src="~/Content/CreativeButtons/js/classie.js"></script>
+<script src="~/Content/CreativeButtons/js/modernizr.custom.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

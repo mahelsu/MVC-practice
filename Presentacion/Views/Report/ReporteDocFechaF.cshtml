@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "ReporteDocFechaF";
+}
+
+<h2>RInserte aquí las respectivas fechas para generar reporte</h2>
+
+<form action="/Report/ReporteDocFechaR" method="post">
+    <div>
+        <div class="col-sm-5">
+            <label>Fecha desde</label>
+            <input type="text" name="fdesde" placeholder="DD/MM/YYYY" class="form-control" />
+            <br />
+            <label>Fecha hasta</label>
+            <input type="text" name="fhasta" placeholder="DD/MM/YYYY" class="form-control" />
+            <button class="btn btn-info">Buscar Documentos</button>
+            <br />
+            <a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>
+        </div>
+     </div>
+     
+</form>
+
+
+    
+

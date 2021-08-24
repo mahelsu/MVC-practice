@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Capa_Entidad.rptDocD_Result>
+
+@{
+    ViewBag.Title = "ReporteDocDestinoR";
+}
+
+<h2>Reporte por departamento de destino</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Tipo</label>
+        </th>
+        <th>
+            <label>Departamento de origen</label>
+        </th>
+        <th>
+            <label>Departamento de destino</label>
+        </th>
+        <th>
+            <label>Secuencia o código</label>
+        </th>
+        <th>
+            <label>Fecha de expedio</label>
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamento_de_origen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamento_de_Destino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.secuencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_de_expedio)
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+<a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>

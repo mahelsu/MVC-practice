@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Capa_Entidad.Departamento>
+
+@{
+    ViewBag.Title = "ReporteDepartamento";
+}
+
+<h2>Reporte departamentos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Nombre</label>
+        </th>
+        <th>
+           <label>Siglas</label>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.siglas)
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+<br />
+<a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>

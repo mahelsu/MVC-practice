@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Capa_Entidad.rptEmpDpt_Result>
+
+@{
+    ViewBag.Title = "ReporteEmpleado";
+}
+
+<h2>Reporte empleados</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Departamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo)
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+<br />
+
+<a href="/Report/IndexReport" class="btn btn-2 btn-2c">Volver</a>

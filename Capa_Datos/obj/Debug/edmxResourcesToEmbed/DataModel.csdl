@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoFinalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="departamento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="siglas" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK__empleado__idDpt__571DF1D5" FromRole="departamento" ToRole="empleado" />
+  </EntityType>
+  <EntityType Name="documento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="idEmpleado" Type="Int32" />
+    <Property Name="dptOrigen" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="dptDestino" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK__documento__idEmp__5AEE82B9" FromRole="documento" ToRole="empleado" />
+  </EntityType>
+  <EntityType Name="empleado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="idDpt" Type="Int32" />
+    <Property Name="cargo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="departamento" Relationship="Self.FK__empleado__idDpt__571DF1D5" FromRole="empleado" ToRole="departamento" />
+    <NavigationProperty Name="documento" Relationship="Self.FK__documento__idEmp__5AEE82B9" FromRole="empleado" ToRole="documento" />
+  </EntityType>
+  <Association Name="FK__empleado__idDpt__571DF1D5">
+    <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="idDpt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__documento__idEmp__5AEE82B9">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+    <End Role="documento" Type="Self.documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="documento">
+        <PropertyRef Name="idEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoFinalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="departamento" EntityType="Self.departamento" />
+    <EntitySet Name="documento" EntityType="Self.documento" />
+    <EntitySet Name="empleado" EntityType="Self.empleado" />
+    <AssociationSet Name="FK__empleado__idDpt__571DF1D5" Association="Self.FK__empleado__idDpt__571DF1D5">
+      <End Role="departamento" EntitySet="departamento" />
+      <End Role="empleado" EntitySet="empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__documento__idEmp__5AEE82B9" Association="Self.FK__documento__idEmp__5AEE82B9">
+      <End Role="empleado" EntitySet="empleado" />
+      <End Role="documento" EntitySet="documento" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
